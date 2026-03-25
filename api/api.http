@@ -1,0 +1,12 @@
+### Test api create order
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "userEmail": "test@example.com",
+  "productId": "PROD-001",
+  "quantity": 2
+}
+
+###
+

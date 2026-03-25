@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: order-messaging-demo
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+    # Listener configuration
+    listener:
+      simple:
+        # Retry configuration
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+          max-interval: 5000
+          multiplier: 2
+        # Acknowledge mode
+        acknowledge-mode: auto
+        # Prefetch count (how many messages to fetch at once)
+        prefetch: 1
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.demo.messaging: DEBUG
+    org.springframework.amqp: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
