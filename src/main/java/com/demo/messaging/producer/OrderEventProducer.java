@@ -1,6 +1,7 @@
 package com.demo.messaging.producer;
 
 import com.demo.messaging.config.RabbitMQConfig;
+import com.demo.messaging.config.RabbitMQImproveConfig;
 import com.demo.messaging.model.OrderEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +35,8 @@ public class OrderEventProducer {
                 orderEvent.quantity());
 
         rabbitTemplate.convertAndSend(
-                RabbitMQConfig.EXCHANGE_NAME,
-                RabbitMQConfig.ROUTING_KEY,
+                RabbitMQImproveConfig.EXCHANGE_NAME,
+                "order.created",
                 orderEvent
         );
 

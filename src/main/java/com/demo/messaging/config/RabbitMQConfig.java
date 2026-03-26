@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * RabbitMQ configuration for messaging infrastructure.
  */
-@Configuration
+//@Configuration
 public class RabbitMQConfig {
 
     public static final String QUEUE_NAME = "order.queue";
@@ -21,7 +21,7 @@ public class RabbitMQConfig {
     /**
      * Declare the order queue.
      */
-    @Bean
+//    @Bean
     public Queue orderQueue() {
         return QueueBuilder.durable(QUEUE_NAME).build();
     }
@@ -29,7 +29,7 @@ public class RabbitMQConfig {
     /**
      * Declare the direct exchange.
      */
-    @Bean
+//    @Bean
     public DirectExchange orderExchange() {
         return new DirectExchange(EXCHANGE_NAME);
     }
@@ -37,7 +37,7 @@ public class RabbitMQConfig {
     /**
      * Bind the queue to the exchange with the routing key.
      */
-    @Bean
+//    @Bean
     public Binding binding(Queue orderQueue, DirectExchange orderExchange) {
         return BindingBuilder.bind(orderQueue).to(orderExchange).with(ROUTING_KEY);
     }
@@ -45,7 +45,7 @@ public class RabbitMQConfig {
     /**
      * Configure Jackson message converter for JSON serialization.
      */
-    @Bean
+//    @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
@@ -53,7 +53,7 @@ public class RabbitMQConfig {
     /**
      * Configure RabbitTemplate with JSON message converter.
      */
-    @Bean
+//    @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(jsonMessageConverter());

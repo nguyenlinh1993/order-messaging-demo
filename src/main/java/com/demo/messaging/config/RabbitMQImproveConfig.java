@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * RabbitMQ configuration for messaging infrastructure.
  */
-//@Configuration
+@Configuration
 public class RabbitMQImproveConfig {
     public static final String EMAIL_QUEUE_NAME = "email.queue";
     public static final String INVENTORY_QUEUE_NAME = "inventory.queue";
@@ -21,7 +21,7 @@ public class RabbitMQImproveConfig {
     /**
      * Declare the inventory queue.
      */
-//    @Bean("inventoryQueue")
+    @Bean("inventoryQueue")
     public Queue inventoryQueue() {
         return QueueBuilder.durable(INVENTORY_QUEUE_NAME).build();
     }
@@ -29,7 +29,7 @@ public class RabbitMQImproveConfig {
     /**
      * Declare the email queue.
      */
-//    @Bean("emailQueue")
+    @Bean("emailQueue")
     public Queue emailQueue() {
         return QueueBuilder.durable(EMAIL_QUEUE_NAME).build();
     }
@@ -37,7 +37,7 @@ public class RabbitMQImproveConfig {
     /**
      * Declare the direct exchange.
      */
-//    @Bean
+    @Bean
     public TopicExchange orderExchange() {
         return new TopicExchange(EXCHANGE_NAME);
     }
@@ -45,14 +45,14 @@ public class RabbitMQImproveConfig {
     /**
      * Bind the queue to the exchange with the routing key.
      */
-//    @Bean
+    @Bean
     public Binding bindingEmail(@Qualifier("emailQueue") Queue emailQueue, TopicExchange orderExchange) {
         return BindingBuilder.bind(emailQueue)
                 .to(orderExchange)
                 .with("order.*");
     }
 
-//    @Bean
+    @Bean
     public Binding bindingInventory(@Qualifier("inventoryQueue") Queue inventoryQueue, TopicExchange orderExchange) {
         return BindingBuilder.bind(inventoryQueue)
                 .to(orderExchange)
@@ -62,7 +62,7 @@ public class RabbitMQImproveConfig {
     /**
      * Configure Jackson message converter for JSON serialization.
      */
-//    @Bean
+    @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
@@ -70,7 +70,7 @@ public class RabbitMQImproveConfig {
     /**
      * Configure RabbitTemplate with JSON message converter.
      */
-//    @Bean
+    @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(jsonMessageConverter());

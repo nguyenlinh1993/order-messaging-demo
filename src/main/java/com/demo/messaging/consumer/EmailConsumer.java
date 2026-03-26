@@ -1,6 +1,7 @@
 package com.demo.messaging.consumer;
 
 import com.demo.messaging.config.RabbitMQConfig;
+import com.demo.messaging.config.RabbitMQImproveConfig;
 import com.demo.messaging.model.OrderEvent;
 import com.demo.messaging.service.EmailService;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class EmailConsumer {
      * 
      * @param orderEvent the received order event
      */
-    @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
+    @RabbitListener(queues = RabbitMQImproveConfig.EMAIL_QUEUE_NAME)
     public void handleOrderEvent(OrderEvent orderEvent) {
         log.info("📬 [EmailConsumer] Received order event: orderId={}", orderEvent.orderId());
 
